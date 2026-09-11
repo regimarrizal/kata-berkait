@@ -485,7 +485,6 @@ function startTimer() {
   timerEl.textContent = dur;
   ringEl.style.strokeDashoffset = 0;
   timerEl.parentElement.classList.remove('timer-danger');
-  soundFx.tick(false);
 
   state.timerInterval = setInterval(() => {
     state.timerSeconds--;
@@ -496,9 +495,9 @@ function startTimer() {
 
     if (state.timerSeconds <= 3 && state.timerSeconds > 0) {
       timerEl.parentElement.classList.add('timer-danger');
-      soundFx.tick(true); // Suara detik mendesak
-    } else if (state.timerSeconds > 0) {
-      soundFx.tick(false); // Suara detik normal
+      soundFx.tick(true);  // Suara detik mendesak (3, 2, 1)
+    } else if (state.timerSeconds <= 9 && state.timerSeconds > 3) {
+      soundFx.tick(false); // Suara detik normal (9, 8, 7, 6, 5, 4)
     }
 
     if (state.timerSeconds <= 0) {
