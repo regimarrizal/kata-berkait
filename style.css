@@ -326,6 +326,22 @@ body {
   filter: grayscale(0.5);
 }
 
+/* Buka Semua (Reveal All) */
+.btn-reveal-all {
+  background: linear-gradient(180deg, #fbbf24, #d97706);
+  color: #1a0800;
+  box-shadow: 0 4px 0 #92400e, 0 4px 10px rgba(251, 191, 36, 0.35);
+  font-weight: 800;
+}
+.btn-reveal-all:hover { filter: brightness(1.12); }
+.btn-reveal-all:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+  filter: grayscale(0.5);
+}
+
 .btn-sm {
   height: 38px;
   font-size: 0.78rem;
@@ -846,7 +862,7 @@ body {
   }
   .row-actions {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     width: 100%;
     gap: 8px;
   }
@@ -966,14 +982,14 @@ body {
   /* 2x2 Grid of Roomy Tactile Buttons */
   .row-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
     width: 100%;
   }
   .row-actions .btn {
-    height: 40px;
-    font-size: 0.78rem;
-    padding: 0 8px;
+    height: 38px;
+    font-size: 0.72rem;
+    padding: 0 6px;
     width: 100%;
   }
 }

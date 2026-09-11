@@ -260,6 +260,9 @@ function renderBoard(soal, tema, col) {
         <button class="btn btn-buka-kanan btn-sm" onclick="revealFromRight(${idx})" id="btnKanan-${idx}" title="Buka 1 huruf dari kanan">
           KANAN ▶
         </button>
+        <button class="btn btn-reveal-all btn-sm" onclick="revealAll(${idx})" id="btnBuka-${idx}" title="Buka semua huruf">
+          👁 BUKA
+        </button>
         <button class="btn btn-green btn-sm" onclick="addScore('A',${idx})" id="btnA-${idx}" title="+Poin Kelompok A">
           🟢 +TIM A
         </button>
@@ -352,6 +355,17 @@ function revealFromRight(idx) {
 }
 
 /* =====================================================
+   REVEAL ALL  (buka semua huruf sekaligus)
+   ===================================================== */
+function revealAll(idx) {
+  if (!state.currentSoal) return;
+  const rs = state.rowStates[idx];
+  if (rs.revealed) { showToast('Kata sudah terbuka sepenuhnya!'); return; }
+  finalizeReveal(idx);
+  soundFx.score();
+}
+
+/* =====================================================
    FINALIZE REVEAL  (dipanggil saat semua huruf terbuka / skor bertambah)
    ===================================================== */
 function finalizeReveal(idx) {
@@ -370,8 +384,10 @@ function finalizeReveal(idx) {
 
   const btnKiri  = $(`btnKiri-${idx}`);
   const btnKanan = $(`btnKanan-${idx}`);
+  const btnBuka  = $(`btnBuka-${idx}`);
   if (btnKiri)  btnKiri.disabled  = true;
   if (btnKanan) btnKanan.disabled = true;
+  if (btnBuka)  btnBuka.disabled  = true;
 
   showToast(`🎉 Kata "${item.kata}" Terbuka!`);
 }
