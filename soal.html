@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<title>40 Soal – Game Kata Berkait</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Orbitron:wght@700;900&display=swap');
+
+  @page { size: A4; margin: 14mm 12mm; }
+  @media print {
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: #fff; color: #1a1a2e; font-size: 9pt; }
+
+  /* ===== COVER ===== */
+  .cover {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg,#0d0820,#1a0a3e,#0a1628);
+    color: #fff; text-align: center; padding: 40px;
+    page-break-after: always;
+  }
+  .cover-icon { font-size: 60pt; margin-bottom: 16px; filter: drop-shadow(0 0 20px #00eeff); }
+  .cover-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34pt; font-weight: 900; letter-spacing: 8px;
+    text-shadow: 0 0 30px #00eeff, 0 0 60px #b400ff;
+    margin-bottom: 8px;
+  }
+  .cover-title span { color: #00eeff; }
+  .cover-sub { font-size: 11pt; letter-spacing: 4px; color: #9988cc; text-transform: uppercase; margin-bottom: 36px; }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(0,238,255,.15); border: 2px solid #00eeff;
+    border-radius: 50px; padding: 10px 30px;
+    font-family: 'Orbitron', sans-serif; font-size: 13pt; font-weight: 700;
+    color: #00eeff; letter-spacing: 3px; margin-bottom: 40px;
+  }
+  .cover-divider {
+    width: 180px; height: 2px;
+    background: linear-gradient(90deg,transparent,#00eeff,transparent);
+    margin: 20px auto;
+  }
+  .cover-stats { display: flex; gap: 50px; justify-content: center; margin-top: 6px; }
+  .stat-num {
+    font-family: 'Orbitron', sans-serif; font-size: 28pt; font-weight: 900;
+    color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,.5);
+    display: block;
+  }
+  .stat-lbl { font-size: 7.5pt; color: #9988cc; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .cover-note { font-size: 8pt; color: #6655aa; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; }
+
+  /* ===== TABLE OF CONTENTS ===== */
+  .toc-page { padding: 20px 0; page-break-after: always; }
+  .page-title {
+    font-family: 'Orbitron', sans-serif; font-size: 15pt; font-weight: 900;
+    color: #1a0a3e; letter-spacing: 4px; text-align: center; margin-bottom: 4px;
+  }
+  .title-bar {
+    width: 90px; height: 3px;
+    background: linear-gradient(90deg,#b400ff,#00eeff);
+    border-radius: 99px; margin: 0 auto 18px;
+  }
+  .toc-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 6px;
+  }
+  .toc-item {
+    background: linear-gradient(135deg,#f4f0ff,#eaf4ff);
+    border: 1px solid #d0c8f0; border-left: 3px solid;
+    border-radius: 6px; padding: 6px 8px; font-size: 7.5pt;
+  }
+  .toc-num { font-family:'Orbitron',sans-serif; font-weight:900; font-size:8pt; }
+  .toc-tema { font-weight:600; color:#1a0a3e; }
+
+  /* ===== SOAL GRID ===== */
+  .page-section { margin-bottom: 10px; }
+  .soal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .kolom-card { border: 1.5px solid #d0c8f0; border-radius: 10px; overflow: hidden; break-inside: avoid; }
+  .kolom-header { display:flex; align-items:center; gap:8px; padding:7px 10px; color:#fff; }
+  .kolom-num {
+    font-family:'Orbitron',sans-serif; font-size:7.5pt; font-weight:900;
+    background:rgba(255,255,255,.25); border-radius:50px; padding:2px 7px; letter-spacing:1px;
+  }
+  .kolom-tema { font-weight:700; font-size:8pt; letter-spacing:1px; text-transform:uppercase; flex:1; }
+
+  /* ===== WORD ROW ===== */
+  .word-row { display:flex; align-items:center; padding:4px 8px; border-bottom:1px solid rgba(0,0,0,.06); gap:5px; }
+  .word-row:last-child { border-bottom:none; }
+  .w-idx { font-family:'Orbitron',sans-serif; font-size:6pt; font-weight:700; color:#aaa; min-width:14px; text-align:center; }
+  .w-kata { font-family:'Orbitron',sans-serif; font-weight:700; font-size:7.5pt; min-width:82px; letter-spacing:1px; color:#1a0a3e; }
+  .w-stars { min-width:54px; font-size:7pt; letter-spacing:1px; }
+  .star { color:#ffd700; } .star-e { color:#ddd; }
+  .w-pts { font-family:'Orbitron',sans-serif; font-size:6pt; font-weight:700; color:#888; min-width:18px; }
+  .w-hint { font-size:7pt; color:#444; font-style:italic; flex:1; line-height:1.3; }
+
+  /* ===== GRADIENT HEADERS ===== */
+  .g1{background:linear-gradient(135deg,#6a0dad,#9b30ff);}
+  .g2{background:linear-gradient(135deg,#0057b8,#2196f3);}
+  .g3{background:linear-gradient(135deg,#00796b,#26a69a);}
+  .g4{background:linear-gradient(135deg,#c62828,#ef5350);}
+  .g5{background:linear-gradient(135deg,#e65100,#ff9800);}
+  .g6{background:linear-gradient(135deg,#1565c0,#42a5f5);}
+  .g7{background:linear-gradient(135deg,#558b2f,#8bc34a);}
+  .g8{background:linear-gradient(135deg,#6a1b9a,#ab47bc);}
+  .g9{background:linear-gradient(135deg,#00838f,#4dd0e1);}
+  .g10{background:linear-gradient(135deg,#37474f,#78909c);}
+  .g11{background:linear-gradient(135deg,#bf360c,#ff7043);}
+  .g12{background:linear-gradient(135deg,#1a237e,#5c6bc0);}
+  .g13{background:linear-gradient(135deg,#880e4f,#e91e63);}
+  .g14{background:linear-gradient(135deg,#4a148c,#7b1fa2);}
+  .g15{background:linear-gradient(135deg,#827717,#f9a825);}
+  .g16{background:linear-gradient(135deg,#01579b,#0288d1);}
+  .g17{background:linear-gradient(135deg,#1b5e20,#388e3c);}
+  .g18{background:linear-gradient(135deg,#b71c1c,#e53935);}
+  .g19{background:linear-gradient(135deg,#006064,#00acc1);}
+  .g20{background:linear-gradient(135deg,#4e342e,#8d6e63);}
+  .g21{background:linear-gradient(135deg,#263238,#546e7a);}
+  .g22{background:linear-gradient(135deg,#33691e,#7cb342);}
+  .g23{background:linear-gradient(135deg,#f57f17,#fbc02d);}
+  .g24{background:linear-gradient(135deg,#0d47a1,#1e88e5);}
+  .g25{background:linear-gradient(135deg,#3e2723,#795548);}
+  .g26{background:linear-gradient(135deg,#311b92,#673ab7);}
+  .g27{background:linear-gradient(135deg,#004d40,#00897b);}
+  .g28{background:linear-gradient(135deg,#6a0080,#c62828);}
+  .g29{background:linear-gradient(135deg,#e65100,#fb8c00);}
+  .g30{background:linear-gradient(135deg,#1a237e,#3949ab);}
+  .g31{background:linear-gradient(135deg,#194d33,#2e7d32);}
+  .g32{background:linear-gradient(135deg,#880e4f,#ad1457);}
+  .g33{background:linear-gradient(135deg,#4a148c,#6a1b9a);}
+  .g34{background:linear-gradient(135deg,#bf360c,#ef6c00);}
+  .g35{background:linear-gradient(135deg,#0d47a1,#283593);}
+  .g36{background:linear-gradient(135deg,#1b5e20,#2e7d32);}
+  .g37{background:linear-gradient(135deg,#4e342e,#6d4c41);}
+  .g38{background:linear-gradient(135deg,#006064,#00838f);}
+  .g39{background:linear-gradient(135deg,#311b92,#4527a0);}
+  .g40{background:linear-gradient(135deg,#b71c1c,#d32f2f);}
+
+  /* ===== PRINT BUTTON ===== */
+  .print-btn {
+    position:fixed; bottom:24px; right:24px;
+    background:linear-gradient(135deg,#b400ff,#5500cc);
+    color:#fff; border:none; border-radius:50px;
+    padding:13px 26px; font-size:11pt; font-weight:700;
+    cursor:pointer; box-shadow:0 6px 24px rgba(180,0,255,.5);
+    font-family:'Poppins',sans-serif; letter-spacing:1px; z-index:999;
+    transition:transform .2s;
+  }
+  .print-btn:hover { transform:scale(1.06); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-icon">🔗</div>
+  <div class="cover-title">KATA <span>BERKAIT</span></div>
+  <div class="cover-sub">Game Kata Berantai Interaktif</div>
+  <div class="cover-divider"></div>
+  <div class="cover-badge">📋 BANK SOAL LENGKAP</div>
+  <div class="cover-stats">
+    <div><span class="stat-num">40</span><div class="stat-lbl">Kolom Soal</div></div>
+    <div><span class="stat-num">8</span><div class="stat-lbl">Kata / Kolom</div></div>
+    <div><span class="stat-num">320</span><div class="stat-lbl">Total Kata</div></div>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="cover-note">Berisi kunci jawaban &amp; petunjuk (hint) lengkap</div>
+</div>
+
+<!-- DAFTAR ISI -->
+<div class="toc-page">
+  <div class="page-title">DAFTAR ISI SOAL</div>
+  <div class="title-bar"></div>
+  <div class="toc-grid" id="tocGrid"></div>
+</div>
+
+<!-- SOAL CONTAINER -->
+<div id="soalContainer"></div>
+
+<!-- TOMBOL CETAK -->
+<button class="print-btn no-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+
+<script src="soal-data.js"></script>
+<script>
+const SOAL = SOAL_DATA;
+
+// --- Daftar Isi ---
+const tocColors = ['#9b30ff','#2196f3','#26a69a','#ef5350','#ff9800','#42a5f5','#8bc34a','#ab47bc','#4dd0e1','#78909c','#ff7043','#5c6bc0','#e91e63','#7b1fa2','#f9a825','#0288d1','#388e3c','#e53935','#00acc1','#8d6e63','#546e7a','#7cb342','#fbc02d','#1e88e5','#795548','#673ab7','#00897b','#c62828','#fb8c00','#3949ab','#2e7d32','#ad1457','#6a1b9a','#ef6c00','#283593','#2e7d32','#6d4c41','#00838f','#4527a0','#d32f2f'];
+const tocEl = document.getElementById('tocGrid');
+SOAL.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.className='toc-item';
+  d.style.borderLeftColor=tocColors[i];
+  d.innerHTML=`<span class="toc-num" style="color:${tocColors[i]}">K-${String(i+1).padStart(2,'0')}</span><br><span class="toc-tema">${s.tema}</span>`;
+  tocEl.appendChild(d);
+});
+
+// --- Soal Pages ---
+function stars(n){
+  let s='';const m=Math.min(n,10);
+  for(let i=1;i<=10;i++) s+=`<span class="${i<=m?'star':'star-e'}">★</span>`;
+  return s;
+}
+
+const sc=document.getElementById('soalContainer');
+let html='';
+for(let i=0;i<SOAL.length;i++){
+  if(i%4===0){
+    if(i>0) html+='</div></div>';
+    const from=i+1, to=Math.min(i+4,SOAL.length);
+    html+=`<div class="page-section${i>0?' page-break':''}">`;
+    html+=`<div class="page-title">SOAL KOLOM ${from} – ${to}</div><div class="title-bar"></div>`;
+    html+=`<div class="soal-grid">`;
+  }
+  const col=SOAL[i];
+  html+=`<div class="kolom-card">
+    <div class="kolom-header ${col.g}">
+      <span class="kolom-num">K-${String(i+1).padStart(2,'0')}</span>
+      <span class="kolom-tema">${col.tema}</span>
+    </div>
+    <div class="kolom-body">`;
+  col.soal.forEach((w,wi)=>{
+    html+=`<div class="word-row" style="background:${wi%2===0?'#fafafe':'#fff'}">
+      <span class="w-idx">${wi+1}</span>
+      <span class="w-kata">${w.k}</span>
+      <span class="w-stars">${stars(w.b)}</span>
+      <span class="w-pts">${w.b}★</span>
+      <span class="w-hint">${w.h}</span>
+    </div>`;
+  });
+  html+=`</div></div>`;
+}
+html+='</div></div>';
+sc.innerHTML=html;
+</script>
+</body>
+</html>

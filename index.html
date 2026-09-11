@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kata Berkait – Game Interaktif Kelompok</title>
+  <meta name="description" content="Game Kata Berkait interaktif untuk dua kelompok. Tebak kata berantai, raih poin tertinggi!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Animated Background Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-glow"></div>
+  <div class="logo-wrap">
+    <h1 class="logo-text">🔗 KATA <span class="accent">BERKAIT</span></h1>
+  </div>
+  <p class="logo-sub">Game Kata Berantai Ceria &amp; Interaktif</p>
+</header>
+
+<!-- Control Panel -->
+<section class="control-panel glass-card">
+  <div class="control-grid">
+    <div class="control-item">
+      <label class="ctrl-label" for="roomCode">🏠 Kode Ruangan</label>
+      <div class="input-btn-group">
+        <input id="roomCode" class="ctrl-input" type="text" value="6D" maxlength="6" placeholder="6D" />
+        <button class="btn btn-blue btn-action" onclick="changeRoomCode()" id="btnUbahKode">✏️ Ubah</button>
+      </div>
+    </div>
+    <div class="control-item">
+      <label class="ctrl-label" for="colSelect">📋 Kolom (1–40)</label>
+      <div class="input-btn-group">
+        <input id="colSelect" class="ctrl-input ctrl-input--sm" type="number" min="1" max="40" value="1" />
+        <button class="btn btn-green btn-action" onclick="loadSoal()" id="btnLoadSoal">📥 Buka</button>
+      </div>
+    </div>
+    <div class="control-item">
+      <label class="ctrl-label" for="timerDuration">⏱️ Atur Waktu</label>
+      <div class="input-btn-group">
+        <select id="timerDuration" class="ctrl-input" onchange="changeTimerDuration()">
+          <option value="5" selected>5 Detik</option>
+          <option value="10">10 Detik</option>
+          <option value="15">15 Detik</option>
+          <option value="20">20 Detik</option>
+          <option value="25">25 Detik</option>
+          <option value="30">30 Detik</option>
+        </select>
+        <button class="btn btn-orange pulse-btn btn-action" onclick="startTimer()" id="btnTimer">⏱️ Mulai</button>
+      </div>
+    </div>
+    <div class="control-item control-item--actions">
+      <button class="btn btn-red btn-action-wide" onclick="resetSkor()" id="btnReset">🔄 Reset Skor</button>
+    </div>
+  </div>
+</section>
+
+<!-- Scoreboard -->
+<section class="scoreboard">
+  <div class="score-card glass-card team-a" id="scoreCardA">
+    <div class="team-label">👥 KELOMPOK A</div>
+    <div class="team-score" id="scoreA">0</div>
+    <div class="team-bar"><div class="team-bar-fill bar-a" id="barA" style="width:0%"></div></div>
+  </div>
+
+  <!-- Timer Circle -->
+  <div class="timer-wrap">
+    <svg class="timer-ring" viewBox="0 0 120 120">
+      <circle class="ring-bg" cx="60" cy="60" r="52"/>
+      <circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="52"
+              stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+    </svg>
+    <div class="timer-display" id="timerDisplay">⏸</div>
+  </div>
+
+  <div class="score-card glass-card team-b" id="scoreCardB">
+    <div class="team-label">👥 KELOMPOK B</div>
+    <div class="team-score" id="scoreB">0</div>
+    <div class="team-bar"><div class="team-bar-fill bar-b" id="barB" style="width:0%"></div></div>
+  </div>
+</section>
+
+<!-- Game Board -->
+<main class="game-board" id="gameBoard">
+  <div class="board-title">📌 Soal Belum Dimuat — Klik "Load Soal" untuk Memulai</div>
+</main>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Modal Konfirmasi -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal glass-card">
+    <div class="modal-icon" id="modalIcon">⚠️</div>
+    <h2 class="modal-title" id="modalTitle">Konfirmasi</h2>
+    <p class="modal-msg" id="modalMsg">Yakin reset semua skor?</p>
+    <div class="modal-actions">
+      <button class="btn btn-red" onclick="confirmModal()" id="btnConfirmYes">✔ Ya, Lanjutkan</button>
+      <button class="btn btn-blue" onclick="closeModal()">✖ Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Winner Banner -->
+<div class="winner-overlay" id="winnerOverlay">
+  <div class="winner-card glass-card">
+    <div class="fireworks" id="fireworks"></div>
+    <div class="winner-crown">🏆</div>
+    <h2 class="winner-title" id="winnerTitle">KELOMPOK A MENANG!</h2>
+    <p class="winner-score" id="winnerScore">Skor: 42</p>
+    <button class="btn btn-green" onclick="closeWinner()">🎮 Main Lagi</button>
+  </div>
+</div>
+
+<script src="soal-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

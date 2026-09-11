@@ -1,0 +1,6 @@
+# Preview images (development only)
+preview_*.png
+
+# OS files
+Thumbs.db
+.DS_Store
